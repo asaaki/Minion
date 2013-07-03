@@ -1,7 +1,7 @@
 defmodule Excloud do
 	def announce do
 		{:ok, socket} = :gen_udp.open 6789
-		:gen_udp.send(socket, {224,0,0,1}, 6790, "Node: #{Node.self}")
+		:gen_udp.send(socket, {224,0,0,1}, 6790, "NEW NODE #{Node.self}")
 		:gen_udp.close socket
 	end
 
@@ -23,14 +23,12 @@ defmodule Excloud do
 	end
 
 	def process_message(message) do
-		IO.puts "Message: #{inspect(message)}"
-		<< "Node: ", node_name :: binary >> = "#{message}"
+		<< "NEW NODE ", name :: binary >> = "#{message}"
 
-		IO.puts "node_name: #{inspect(node_name)}"
+		Node.connect :"#{name}"
 
-		Node.connect :"#{node_name}"
+		IO.puts "New node connected: #{inspect(name)}"
 	end
-
 end
 
 Excloud.announce()
