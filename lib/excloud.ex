@@ -1,7 +1,7 @@
 defmodule Excloud do
 	def announce do
-		{:ok, socket} = :gen_udp.open 6789, [{:broadcast, true}]
-		:gen_udp.send(socket, {255,255,255,255}, 6790, "Node: #{Node.self}")
+		{:ok, socket} = :gen_udp.open 6789
+		:gen_udp.send(socket, {224,0,0,1}, 6790, "Node: #{Node.self}")
 		:gen_udp.close socket
 	end
 
