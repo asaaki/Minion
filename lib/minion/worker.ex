@@ -7,9 +7,11 @@ defmodule Minion.Worker do
   end
 
   def announce do
-    {:ok, socket} = :gen_udp.open 6789
-    :gen_udp.send(socket, {224,0,0,1}, 6790, "NEW NODE #{Node.self}")
-    :gen_udp.close socket
+    if length(Node.list) == 0 do
+      {:ok, socket} = :gen_udp.open 6789
+      :gen_udp.send(socket, {224,0,0,1}, 6790, "NEW NODE #{Node.self}")
+      :gen_udp.close socket
+    end
   end
 
   def receive_connections do
