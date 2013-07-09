@@ -10,7 +10,7 @@ defmodule Minion.Mixfile do
   # Configuration for the OTP application
   def application do
   [ registered: [:minion],
-    mod: { Minion, [:nonsense] } ]
+    mod: { Minion, [] } ]
   end
 
   # Returns the list of dependencies in the format:
