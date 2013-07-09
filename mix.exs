@@ -1,15 +1,16 @@
-defmodule Excloud.Mixfile do
+defmodule Minion.Mixfile do
   use Mix.Project
 
   def project do
-    [ app: :excloud,
+    [ app: :minion,
       version: "0.0.1",
       deps: deps ]
   end
 
   # Configuration for the OTP application
   def application do
-    []
+  [ registered: [:minion],
+    mod: { Minion, [:nonsense] } ]
   end
 
   # Returns the list of dependencies in the format:
