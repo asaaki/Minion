@@ -3,7 +3,7 @@ defmodule Minion.Worker do
     :timer.apply_interval(1000, __MODULE__, :announce, [])
     :timer.apply_interval(5000, __MODULE__, :receive_connections, [])
 
-    {:ok, Process.self}
+    {:ok, Kernel.self}
   end
 
   def announce do
