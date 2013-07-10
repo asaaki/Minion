@@ -2,7 +2,7 @@
 
 Start with
 
-`elixir -pa ebin --app minion --name minion --cookie minion --no-halt`
+`elixir --name minion --cookie minion --no-halt -pa ebin --app minion`
 
 
 Start interactive with
