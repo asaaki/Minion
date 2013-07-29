@@ -1,4 +1,16 @@
 defmodule Cmd do
+  @moduledoc """
+  This module provides allow you to execute remote shell commands and get back the output.
+
+  ## Examples
+
+      Cmd.all "uname -v"
+      #=> #PID<0.101.0>
+      #=> minion@MacBook-Air.local says: Darwin Kernel Version 12.4.0: Wed May  1 17:57:12 PDT 2013; root:xnu-2050.24.15~1/RELEASE_X86_64
+      #=> minion@raspberry.local says: #1 PREEMPT Sun Jul 21 17:39:58 CDT 2013
+  """
+
+  @doc "Executes command on all nodes including yourself"
   def all <<command::binary>> do
     all Node.self, command
   end
@@ -8,6 +20,7 @@ defmodule Cmd do
     execute sender, nodes, command
   end
 
+  @doc "Executes command on all nodes except yourself"
   def other <<command::binary>> do
     other Node.self, command
   end
@@ -16,6 +29,7 @@ defmodule Cmd do
     execute sender, Node.list, command
   end
 
+  @doc "Executes command on all nodes except the given nodes"
   def except nodes, <<command::binary>> do
     except Node.self, nodes, command
   end
@@ -30,6 +44,7 @@ defmodule Cmd do
     end)
   end
 
+  @doc "Executes command only on the given nodes"
   def only nodes, <<command::binary>> do
     only Node.self, nodes, command
   end

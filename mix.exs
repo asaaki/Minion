@@ -4,6 +4,9 @@ defmodule Minion.Mixfile do
   def project do
     [ app: :minion,
       version: "0.0.1",
+      name: "Minion",
+      source_url: "https://github.com/ChaosSteffen/Minion",
+      homepage_url: "https://github.com/ChaosSteffen/Minion",
       deps: deps ]
   end
 
@@ -16,6 +19,6 @@ defmodule Minion.Mixfile do
   # Returns the list of dependencies in the format:
   # { :foobar, "0.1", git: "https://github.com/elixir-lang/foobar.git" }
   defp deps do
-    []
+    [ { :ex_doc, github: "elixir-lang/ex_doc" } ]
   end
 end
