@@ -9,7 +9,7 @@ defmodule Minion.Worker do
   def announce do
     if length(Node.list) == 0 do
       {:ok, socket} = :gen_udp.open 6789
-      :gen_udp.send(socket, {224,0,0,1}, 6790, "NEW NODE #{Node.self}")
+      :gen_udp.send(socket, {224,0,0,1}, 6790, "BANANA #{Node.self}")
       :gen_udp.close socket
     end
   end
@@ -34,7 +34,7 @@ defmodule Minion.Worker do
   end
 
   def process_message(message) do
-    << "NEW NODE ", name :: binary >> = "#{message}"
+    << "BANANA ", name :: binary >> = "#{message}"
 
     Node.connect :"#{name}"
 
