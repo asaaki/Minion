@@ -8,7 +8,7 @@ defmodule Cmd do
 
   ## Examples
 
-      Cmd.all \"uname -v\"
+      Cmd.all "uname -v"
       #=> #PID<0.101.0>
       #=> minion@MacBook-Air.local says: Darwin Kernel Version 12.4.0: Wed May  1 17:57:12 PDT 2013; root:xnu-2050.24.15~1/RELEASE_X86_64
       #=> minion@raspberry.local says: #1 PREEMPT Sun Jul 21 17:39:58 CDT 2013
@@ -23,7 +23,7 @@ defmodule Cmd do
   @doc """
   Runs a shell command on all nodes including yourself and takes a function that gets back the output
 
-    ## Examples
+  ## Examples
 
       Cmd.all "uname -v", fn(node, result) ->
         text = "\#{node} says: \#{result}"
