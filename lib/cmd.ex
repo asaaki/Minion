@@ -8,7 +8,37 @@ defmodule Cmd do
     execute sender, nodes, command
   end
 
-  defp execute sender, list, <<command::binary>> do
+  def other <<command::binary>> do
+    other Node.self, command
+  end
+
+  def other sender, <<command::binary>> do
+    execute sender, Node.list, command
+  end
+
+  def except nodes, <<command::binary>> do
+    except Node.self, nodes, command
+  end
+
+  def except sender, nodes, <<command::binary>> do
+    all_nodes = [Node.self | Node.list]
+
+    Enum.each(all_nodes, fn(node) ->
+      if !Enum.member?(nodes, node) do
+        execute sender, [node], command
+      end
+    end)
+  end
+
+  def only nodes, <<command::binary>> do
+    only Node.self, nodes, command
+  end
+
+  def only sender, nodes, <<command::binary>> do
+    execute sender, nodes, command
+  end
+
+  def execute sender, list, <<command::binary>> do
     if length(list) > 0 do
       [head|rest] = list
 
