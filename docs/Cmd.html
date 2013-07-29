@@ -27,15 +27,7 @@
 
       
         <div id="moduledoc" class="docstring">
-          <p>This module provides allow you to execute remote shell commands and get back the output.</p>
-
-<h2>Examples</h2>
-
-<pre><code>Cmd.all &quot;uname -v&quot;
-#=&gt; #PID&lt;0.101.0&gt;
-#=&gt; minion@MacBook-Air.local says: Darwin Kernel Version 12.4.0: Wed May  1 17:57:12 PDT 2013; root:xnu-2050.24.15~1/RELEASE_X86_64
-#=&gt; minion@raspberry.local says: #1 PREEMPT Sun Jul 21 17:39:58 CDT 2013
-</code></pre>
+          <p>This module allows you to execute remote shell commands and get back the output.</p>
 
         </div>
       
@@ -67,11 +59,6 @@
 <li>
   <span class="summary_signature">
     <a href="#except/3">except/3</a>
-  </span>
-</li>
-<li>
-  <span class="summary_signature">
-    <a href="#execute/3">execute/3</a>
   </span>
 </li>
 <li>
@@ -117,73 +104,87 @@
           <h2>Functions</h2>
           <div class="detail">
   <p class="signature" id="all/1">
-    <strong>all(arg1)</strong>
+    <strong>all(command)</strong>
   </p>
-  <div class="docstring"><p>Executes command on all nodes including yourself</p>
+  <div class="docstring"><p>Runs a shell command on all nodes including yourself</p>
+
+<h2>Examples</h2>
+
+<pre><code>Cmd.all &quot;uname -v&quot;
+#=&gt; #PID&lt;0.101.0&gt;
+#=&gt; minion@MacBook-Air.local says: Darwin Kernel Version 12.4.0: Wed May  1 17:57:12 PDT 2013; root:xnu-2050.24.15~1/RELEASE_X86_64
+#=&gt; minion@raspberry.local says: #1 PREEMPT Sun Jul 21 17:39:58 CDT 2013
+</code></pre>
 </div>
   
 </div><div class="detail">
   <p class="signature" id="all/2">
-    <strong>all(sender, arg2)</strong>
+    <strong>all(sender, command)</strong>
   </p>
-  <div class="docstring"></div>
+  <div class="docstring"><p>Runs a shell command on all nodes including yourself and specifies a sender that gets back the output</p>
+</div>
   
 </div><div class="detail">
   <p class="signature" id="except/2">
-    <strong>except(nodes, arg2)</strong>
+    <strong>except(nodes, command)</strong>
   </p>
   <div class="docstring"><p>Executes command on all nodes except the given nodes</p>
 </div>
   
 </div><div class="detail">
   <p class="signature" id="except/3">
-    <strong>except(sender, nodes, arg3)</strong>
+    <strong>except(sender, nodes, command)</strong>
   </p>
-  <div class="docstring"></div>
-  
-</div><div class="detail">
-  <p class="signature" id="execute/3">
-    <strong>execute(sender, list, arg3)</strong>
-  </p>
-  <div class="docstring"></div>
+  <div class="docstring"><p>Executes command on all nodes except the given nodes and specifies a sender that gets back the output</p>
+</div>
   
 </div><div class="detail">
   <p class="signature" id="local/1">
-    <strong>local(arg1)</strong>
+    <strong>local(command)</strong>
   </p>
-  <div class="docstring"></div>
+  <div class="docstring"><p>Runs a shell command on your current node and return output as String</p>
+
+<h2>Examples</h2>
+
+<pre><code>Cmd.local &quot;uname -v&quot;  
+# =&gt; &quot;Darwin Kernel Version 12.4.0: Wed May  1 17:57:12 PDT 2013; root:xnu-2050.24.15~1/RELEASE_X86_64\n&quot;
+</code></pre>
+</div>
   
 </div><div class="detail">
   <p class="signature" id="local/2">
-    <strong>local(sender, arg2)</strong>
+    <strong>local(sender, command)</strong>
   </p>
-  <div class="docstring"></div>
+  <div class="docstring"><p>Runs a shell command on your current node and return output on then senders conlose</p>
+</div>
   
 </div><div class="detail">
   <p class="signature" id="only/2">
-    <strong>only(nodes, arg2)</strong>
+    <strong>only(nodes, command)</strong>
   </p>
   <div class="docstring"><p>Executes command only on the given nodes</p>
 </div>
   
 </div><div class="detail">
   <p class="signature" id="only/3">
-    <strong>only(sender, nodes, arg3)</strong>
+    <strong>only(sender, nodes, command)</strong>
   </p>
-  <div class="docstring"></div>
+  <div class="docstring"><p>Executes command only on the given nodes and specifies a sender that gets back the output</p>
+</div>
   
 </div><div class="detail">
   <p class="signature" id="other/1">
-    <strong>other(arg1)</strong>
+    <strong>other(command)</strong>
   </p>
   <div class="docstring"><p>Executes command on all nodes except yourself</p>
 </div>
   
 </div><div class="detail">
   <p class="signature" id="other/2">
-    <strong>other(sender, arg2)</strong>
+    <strong>other(sender, command)</strong>
   </p>
-  <div class="docstring"></div>
+  <div class="docstring"><p>Executes command on all nodes except yourself and specifies a sender that gets back the output</p>
+</div>
   
 </div>
         </div>
