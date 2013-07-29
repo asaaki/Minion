@@ -119,9 +119,20 @@
   
 </div><div class="detail">
   <p class="signature" id="all/2">
-    <strong>all(sender, command)</strong>
+    <strong>all(command, complete)</strong>
   </p>
-  <div class="docstring"><p>Runs a shell command on all nodes including yourself and specifies a sender that gets back the output</p>
+  <div class="docstring"><p>Runs a shell command on all nodes including yourself and takes a function that gets back the output</p>
+
+<p>## Examples</p>
+
+<pre><code>Cmd.all &quot;uname -v&quot;, fn(node, result) -&gt;
+  text = &quot;#{node} says: #{result}&quot;
+  IO.puts text
+end
+#=&gt; :ok
+#=&gt; minion2@MacBook-Air.local says: Darwin Kernel Version 12.4.0: Wed May  1 17:57:12 PDT 2013; root:xnu-2050.24.15~1/RELEASE_X86_64
+#=&gt; minion@MacBook-Air.local says: Darwin Kernel Version 12.4.0: Wed May  1 17:57:12 PDT 2013; root:xnu-2050.24.15~1/RELEASE_X86_64
+</code></pre>
 </div>
   
 </div><div class="detail">
@@ -133,9 +144,9 @@
   
 </div><div class="detail">
   <p class="signature" id="except/3">
-    <strong>except(sender, nodes, command)</strong>
+    <strong>except(nodes, command, complete)</strong>
   </p>
-  <div class="docstring"><p>Executes command on all nodes except the given nodes and specifies a sender that gets back the output</p>
+  <div class="docstring"><p>Executes command on all nodes except the given nodes and takes a function that gets back the output</p>
 </div>
   
 </div><div class="detail">
@@ -153,9 +164,9 @@
   
 </div><div class="detail">
   <p class="signature" id="local/2">
-    <strong>local(sender, command)</strong>
+    <strong>local(command, complete)</strong>
   </p>
-  <div class="docstring"><p>Runs a shell command on your current node and return output on then senders conlose</p>
+  <div class="docstring"><p>Runs a shell command on your current node and takes a function that gets back the output</p>
 </div>
   
 </div><div class="detail">
@@ -167,9 +178,9 @@
   
 </div><div class="detail">
   <p class="signature" id="only/3">
-    <strong>only(sender, nodes, command)</strong>
+    <strong>only(nodes, command, complete)</strong>
   </p>
-  <div class="docstring"><p>Executes command only on the given nodes and specifies a sender that gets back the output</p>
+  <div class="docstring"><p>Executes command only on the given nodes and takes a function that gets back the output</p>
 </div>
   
 </div><div class="detail">
@@ -181,9 +192,9 @@
   
 </div><div class="detail">
   <p class="signature" id="other/2">
-    <strong>other(sender, command)</strong>
+    <strong>other(command, complete)</strong>
   </p>
-  <div class="docstring"><p>Executes command on all nodes except yourself and specifies a sender that gets back the output</p>
+  <div class="docstring"><p>Executes command on all nodes except yourself and takes a function that gets back the output</p>
 </div>
   
 </div>
