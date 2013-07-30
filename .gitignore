@@ -1,6 +1,10 @@
 .DS_Store
-/docs
-/ebin
-/deps
-erl_crash.dump
+.eunit
+deps
+docs
+ebin
+*.beam
+*.plt
+*.o
 *.ez
+erl_crash.dump
