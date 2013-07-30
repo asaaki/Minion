@@ -29,7 +29,7 @@ defmodule Minion do
   	Node.list
   end
 
-  @moduledoc """
+  @doc """
   Executes a function in a module. You can pass arguments, if the function does not require any arguments, pass [].
 
   It does not give you any output. But, the function you are calling could take a callback function that then processes its output.
