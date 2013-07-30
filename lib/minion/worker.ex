@@ -1,4 +1,7 @@
 defmodule Minion.Worker do
+
+  @handshake "BANANA"
+
   def start_link do
     :timer.apply_interval(1000, __MODULE__, :announce, [])
     :timer.apply_interval(5000, __MODULE__, :receive_connections, [])
@@ -9,7 +12,7 @@ defmodule Minion.Worker do
   def announce do
     if length(Node.list) == 0 do
       {:ok, socket} = :gen_udp.open 6789
-      :gen_udp.send(socket, {224,0,0,1}, 6790, "BANANA #{Node.self}")
+      :gen_udp.send(socket, {224,0,0,1}, 6790, "#{@handshake} #{Node.self}")
       :gen_udp.close socket
     end
   end
@@ -34,7 +37,7 @@ defmodule Minion.Worker do
   end
 
   def process_message(message) do
-    << "BANANA ", name :: binary >> = "#{message}"
+    << @handshake, " ", name :: binary >> = "#{message}"
 
     Node.connect :"#{name}"
 
