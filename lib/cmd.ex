@@ -36,10 +36,7 @@ defmodule Cmd do
 
   @doc "Executes command on all nodes except yourself"
   def other command do
-    other command, fn(node, result) ->
-      text = "#{node} says: #{result}"
-      IO.puts text
-    end
+    other command, function(Cmd.print_output/2)
   end
 
   @doc "Executes command on all nodes except yourself and takes a function that gets back the output"
@@ -49,10 +46,7 @@ defmodule Cmd do
 
   @doc "Executes command on all nodes except the given nodes"
   def except nodes, command do
-    except nodes, command, fn(node, result) ->
-      text = "#{node} says: #{result}"
-      IO.puts text
-    end
+    except nodes, command, function(Cmd.print_output/2)
   end
 
   @doc "Executes command on all nodes except the given nodes and takes a function that gets back the output"
