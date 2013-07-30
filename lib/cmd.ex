@@ -34,8 +34,7 @@ defmodule Cmd do
       #=> minion@MacBook-Air.local says: Darwin Kernel Version 12.4.0: Wed May  1 17:57:12 PDT 2013; root:xnu-2050.24.15~1/RELEASE_X86_64
   """
   def all command, complete do
-    nodes = [Node.self | Node.list]
-    execute nodes, command, complete
+    Minion.execute Minion.all, Cmd, :local, [command, complete]
   end
 
   @doc "Executes command on all nodes except yourself"
@@ -48,7 +47,7 @@ defmodule Cmd do
 
   @doc "Executes command on all nodes except yourself and takes a function that gets back the output"
   def other command, complete do
-    execute Node.list, command, complete
+    Minion.execute Minion.other, Cmd, :local, [command, complete]
   end
 
   @doc "Executes command on all nodes except the given nodes"
@@ -61,11 +60,9 @@ defmodule Cmd do
 
   @doc "Executes command on all nodes except the given nodes and takes a function that gets back the output"
   def except nodes, command, complete do
-    all_nodes = [Node.self | Node.list]
-
-    Enum.each(all_nodes, fn(node) ->
-      if !Enum.member?(nodes, node) do
-        execute [node], command, complete
+    Enum.each(Minion.all, fn(node) ->
+      unless Enum.member?(nodes, node) do
+        Minion.execute [node], Cmd, :local, [command, complete]
       end
     end)
   end
@@ -80,19 +77,7 @@ defmodule Cmd do
 
   @doc "Executes command only on the given nodes and takes a function that gets back the output"
   def only nodes, command, complete do
-    execute nodes, command, complete
-  end
-
-  defp execute list, command, complete do
-    if length(list) > 0 do
-      [head|rest] = list
-
-      execute rest, command, complete
-
-      Node.spawn(head, Cmd, :local, [command, complete])
-    end
-
-    :ok
+    Minion.execute nodes, Cmd, :local, [command, complete]
   end
 
   @doc """
@@ -116,7 +101,7 @@ defmodule Cmd do
     result = System.cmd command
 
     if complete do
-      complete.(Node.self, result)
+      complete.(Minion.me, result)
     end
 
     :ok
