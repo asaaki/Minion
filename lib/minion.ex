@@ -29,6 +29,16 @@ defmodule Minion do
   	Node.list
   end
 
+  @doc "Returns a random Minion"
+  def random do
+    Random.sample(all)
+  end
+
+  @doc "Spawns a link on a random minion"
+  def spawn_link function do
+    Node.spawn_link random, function
+  end
+
   @doc """
   Executes a function in a module. You can pass arguments, if the function does not require any arguments, pass [].
 

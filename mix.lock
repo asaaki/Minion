@@ -1,1 +1,3 @@
-[ "ex_doc": {:git, "git://github.com/elixir-lang/ex_doc.git", "745f15b4659aca79a19ed28c719b9354ad916898", []} ]
+[ "elixir-random": {:git, "git://github.com/mururu/elixir-random.git", "e6442fa2273eed85b3f56e5f1628544295ed8913", []},
+  "ex_doc": {:git, "git://github.com/elixir-lang/ex_doc.git", "745f15b4659aca79a19ed28c719b9354ad916898", []},
+  "random": {:git, "git://github.com/mururu/elixir-random.git", "e6442fa2273eed85b3f56e5f1628544295ed8913", []} ]
