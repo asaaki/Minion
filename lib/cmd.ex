@@ -14,10 +14,7 @@ defmodule Cmd do
       #=> minion@raspberry.local says: #1 PREEMPT Sun Jul 21 17:39:58 CDT 2013
   """
   def all command do
-    all command, fn(node, result) ->
-      text = "#{node} says: #{result}"
-      IO.puts text
-    end
+    all(command, function(Cmd.print_output/2))
   end
 
   @doc """
@@ -34,7 +31,7 @@ defmodule Cmd do
       #=> minion@MacBook-Air.local says: Darwin Kernel Version 12.4.0: Wed May  1 17:57:12 PDT 2013; root:xnu-2050.24.15~1/RELEASE_X86_64
   """
   def all command, complete do
-    Minion.execute Minion.all, Cmd, :local, [command, complete]
+    Minion.execute(Minion.all, Cmd, :local, [command, complete])
   end
 
   @doc "Executes command on all nodes except yourself"
@@ -105,5 +102,9 @@ defmodule Cmd do
     end
 
     :ok
+  end
+
+  def print_output node, result do
+    IO.puts "#{node} says: #{result}"
   end
 end
