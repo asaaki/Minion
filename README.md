@@ -3,7 +3,7 @@
 ## Installation
 
 First, get dependencies and compile:  
-`mix mix deps.get`  
+`mix deps.get`  
 `mix compile`
 
 Then, start with  
