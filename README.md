@@ -14,7 +14,7 @@ Or, Start interactive with
 
 ## Documentation
 
-Look, there is a [beautifully generated documentation](http://chaossteffen.github.io/Minion/docs/) for you! It describes all the features on the master branch.
+Look, there is [beautifully generated documentation](http://chaossteffen.github.io/Minion/docs/) for you! It describes all the features on the master branch.
 
 To generate the documetation on your own, just run:  
 `mix deps.get`  
