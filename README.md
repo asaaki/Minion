@@ -26,3 +26,7 @@ Then, have a look into your projects `/docs` folder.
 
 Execute shell commands on all Nodes:  
 `Cmd.all "ls"`
+
+## Contributors
+
+* Christoph Grabo ([@asaaki](https://github.com/asaaki))
