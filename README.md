@@ -1,6 +1,4 @@
-# Minion
-
-## Installation
+# Installation
 
 First, get dependencies and compile:  
 `mix deps.get`  
@@ -12,7 +10,7 @@ Then, start with
 Or, Start interactive with  
 `iex --name minion --cookie minion -S mix`
 
-## Documentation
+# Documentation
 
 Look, there is [beautifully generated documentation](http://chaossteffen.github.io/Minion/docs/) for you! It describes all the features on the master branch.
 
@@ -22,11 +20,11 @@ To generate the documetation on your own, just run:
 
 Then, have a look into your projects `/docs` folder.
 
-## What to do with Minion
+# What to do with Minion
 
 Execute shell commands on all Nodes:  
 `Cmd.all "ls"`
 
-## Contributors
+# Contributors
 
 * Christoph Grabo ([@asaaki](https://github.com/asaaki))
