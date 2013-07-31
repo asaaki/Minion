@@ -3,6 +3,7 @@
 First, git clone the repo:
 ```
 git clone https://github.com/ChaosSteffen/Minion.git
+cd Minion
 ```
 
 After that, get dependencies and compile:  
