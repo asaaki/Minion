@@ -2,8 +2,8 @@
 
 First, git clone the repo:
 ```
-git clone https://github.com/ChaosSteffen/Minion.git
-cd Minion
+git clone https://github.com/ChaosSteffen/Minion.git minion
+cd minion
 ```
 
 After that, get dependencies and compile:
