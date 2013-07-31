@@ -40,6 +40,33 @@ defmodule Minion do
   end
 
   @doc """
+  Applys a function to all elements of a enumerable. Distributes over all known Minions
+
+  ## Example
+
+      Minion.perform_distributed [1,2,3,4,5,6,7,8], fn(x) -> IO.puts("Proudly processed by: #\{Minion.me\}"); x*x end
+      #=> Proudly processed by: minion@MacBook-Air.local
+      #=> Proudly processed by: minion@fennec.local
+      #=> Proudly processed by: minion@raspberry.local
+      #=> [1, 4, 9]
+
+  """
+  def perform_distributed enumerable, function do
+    current = self
+
+    enumerable |> Enum.map(fn(x) ->
+      Minion.spawn_link(fn ->
+        current <- { self, function.(x) } 
+      end)
+    end) |> Enum.map(fn(pid) ->
+      receive do
+        { ^pid, result } -> result
+      end
+    end)
+
+  end
+
+  @doc """
   Executes a function in a module. You can pass arguments, if the function does not require any arguments, pass [].
 
   It does not give you any output. But, the function you are calling could take a callback function that then processes its output.
