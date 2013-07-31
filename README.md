@@ -44,3 +44,4 @@ Cmd.all "ls"
 # Contributors
 
 * Christoph Grabo ([@asaaki](https://github.com/asaaki))
+* Sascha Depold ([@sdepold](https://github.com/sdepold))
