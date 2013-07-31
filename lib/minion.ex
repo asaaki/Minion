@@ -35,8 +35,8 @@ defmodule Minion do
   end
 
   @doc "Spawns a link on a random minion"
-  def spawn_link function do
-    Node.spawn_link random, function
+  def spawn_link fun do
+    Node.spawn_link random, fun
   end
 
   @doc """
@@ -51,12 +51,12 @@ defmodule Minion do
       #=> [1, 4, 9]
 
   """
-  def perform_distributed enumerable, function do
+  def perform_distributed enumerable, fun do
     current = self
 
     enumerable |> Enum.map(fn(x) ->
       Minion.spawn_link(fn ->
-        current <- { self, function.(x) } 
+        current <- { self, fun.(x) } 
       end)
     end) |> Enum.map(fn(pid) ->
       receive do
@@ -88,13 +88,13 @@ defmodule Minion do
       #=> minion@MacBook-Air.local says: Darwin Kernel Version 12.4.0: Wed May  1 17:57:12 PDT 2013; root:xnu-2050.24.15~1/RELEASE_X86_64
       #=> minion@raspberry.local says: #1 PREEMPT Sun Jul 21 17:39:58 CDT 2013
   """
-  def execute nodes, module, function, args do
+  def execute nodes, module, fun, args do
     if length(nodes) > 0 do
       [head|rest] = nodes
 
-      execute rest, module, function, args
+      execute rest, module, fun, args
 
-      Node.spawn(head, module, function, args)
+      Node.spawn(head, module, fun, args)
     end
 
     :ok
