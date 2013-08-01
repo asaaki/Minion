@@ -18,7 +18,7 @@ defmodule Minion do
   def all do
   	[Node.self | Node.list]
   end
-  
+
   @doc "Returns yourself"
   def me do
   	Node.self
@@ -36,8 +36,20 @@ defmodule Minion do
 
   @doc "Spawns a link on a random minion"
   def spawn_link fun do
-    Node.spawn_link random, fun
+    Node.spawn_link random, Minion, :execute_binfun, [:erlang.term_to_binary(fun)]
   end
+
+  @doc """
+  Deserialize and execute passed function binary
+  f1  = fn(x) -> x*x end
+  fun = fn -> IO.puts f1.(7) end
+  random = Minion.me
+  Node.spawn_link random, Minion, :execute_binfun, [:erlang.term_to_binary(fun)]
+  """
+  def execute_binfun binfun do
+    (:erlang.binary_to_term(binfun)).()
+  end
+
 
   @doc """
   Applys a function to all elements of a enumerable. Distributes over all known Minions
@@ -56,7 +68,7 @@ defmodule Minion do
 
     enumerable |> Enum.map(fn(x) ->
       Minion.spawn_link(fn ->
-        current <- { self, fun.(x) } 
+        current <- { self, fun.(x) }
       end)
     end) |> Enum.map(fn(pid) ->
       receive do
